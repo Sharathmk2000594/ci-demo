@@ -32,7 +32,7 @@ pipeline {
         stage('SonarQube Analysis') {
             steps {
                 withSonarQubeEnv('sonarcloud') {
-                    sh 'mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN -Dsonar.organization=$SONAR_ORG -Dsonar.projectKey=$SONAR_KEY'
+                    sh 'mvn -B org.sonarsource.scanner.maven:sonar-maven-plugin:5.8.0.7211:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.token=$SONAR_AUTH_TOKEN -Dsonar.organization=$SONAR_ORG -Dsonar.projectKey=$SONAR_KEY'
                 }
             }
         }
@@ -55,10 +55,25 @@ pipeline {
                 }
             }
         }
+
+        stage('Package') {
+            steps {
+                sh 'mvn -B -DskipTests package'
+                archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+            }
+        }
+
+        stage('Publish to Nexus') {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'nexus-cred', usernameVariable: 'NEXUS_USER', passwordVariable: 'NEXUS_PASS')]) {
+                    sh 'mvn -B -DskipTests -s settings.xml deploy'
+                }
+            }
+        }
     }
 
     post {
-        success { echo 'Build, tests and quality gate passed' }
+        success { echo 'Pipeline passed: artifact published to Nexus' }
         failure { echo 'Pipeline failed, check the first red stage' }
     }
 }
