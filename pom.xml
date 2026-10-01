@@ -1,16 +1,16 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0">
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.demo</groupId>
   <artifactId>calc</artifactId>
   <version>1.0-SNAPSHOT</version>
-  <packaging>jar</packaging>
 
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+    <sonar.organization>sharathmk2000594</sonar.organization>
+    <sonar.projectKey>Sharathmk2000594_ci-demo</sonar.projectKey>
+    <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
   </properties>
 
   <dependencies>
@@ -25,24 +25,9 @@
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-surefire-plugin</artifactId>
-        <version>3.2.5</version>
-      </plugin>
-      <plugin>
-        <groupId>org.jacoco</groupId>
-        <artifactId>jacoco-maven-plugin</artifactId>
-        <version>0.8.12</version>
-        <executions>
-          <execution>
-            <goals><goal>prepare-agent</goal></goals>
-          </execution>
-          <execution>
-            <id>report</id>
-            <phase>test</phase>
-            <goals><goal>report</goal></goals>
-          </execution>
-        </executions>
+        <groupId>org.sonarsource.scanner.maven</groupId>
+        <artifactId>sonar-maven-plugin</artifactId>
+        <version>5.8.0.7211</version>
       </plugin>
     </plugins>
   </build>
@@ -52,9 +37,5 @@
       <id>nexus</id>
       <url>http://172.31.11.242:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
-    <repository>
-      <id>nexus</id>
-      <url>http://172.31.11.242:8081/repository/maven-releases/</url>
-    </repository>
   </distributionManagement>
 </project>
