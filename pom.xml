@@ -5,14 +5,14 @@
   <artifactId>calc</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <properties>
+    <properties>
     <maven.compiler.release>21</maven.compiler.release>
-    <sonar.host.url>https://172.31.47.169:1990</sonar.host.url>
+    <sonar.host.url>http://172.31.47.169:9000</sonar.host.url>
     <sonar.projectKey>calc</sonar.projectKey>
     <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
     <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
-
+  
   <dependencies>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
