@@ -7,9 +7,8 @@
 
   <properties>
     <maven.compiler.release>21</maven.compiler.release>
-    <sonar.host.url>https://sonarcloud.io</sonar.host.url>
-    <sonar.organization>sharathmk2000594</sonar.organization>
-    <sonar.projectKey>Sharathmk2000594_ci-demo</sonar.projectKey>
+    <sonar.host.url>https://172.31.47.169:1990</sonar.host.url>
+    <sonar.projectKey>calc</sonar.projectKey>
     <sonar.qualitygate.wait>true</sonar.qualitygate.wait>
     <sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
   </properties>
