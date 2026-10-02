@@ -2,21 +2,21 @@ pipeline {
     agent { label 'node1' }
 
     stages {
+        stage('SonarQube') {
+            steps {
+                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
+                    sh 'mvn clean sonar:sonar'
+                }
+            }
+        }
         stage('Build') {
             steps {
-                sh 'mvn clean compile'
+                sh 'mvn compile'
             }
         }
         stage('Test') {
             steps {
                 sh 'mvn test'
-            }
-        }
-        stage('SonarQube') {
-            steps {
-                withCredentials([string(credentialsId: 'sonar-token', variable: 'SONAR_TOKEN')]) {
-                    sh 'mvn sonar:sonar'
-                }
             }
         }
         stage('Package') {
